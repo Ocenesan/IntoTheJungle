@@ -32,8 +32,23 @@ Engine::Text* Engine::Text::SetText(string text)
 	return this;
 }
 
+// Tambahan
+Engine::Text* Engine::Text::SetVisible(bool visible) {
+	this->isVisible = visible;
+	return this;
+}
+
+bool Engine::Text::IsVisible() const {
+	return isVisible;
+}
+// Tambahan
+
 void Engine::Text::Draw()
 {
+	// Tambahan
+	if (!isVisible) return;
+	// Tambahan
+
 	float x = position.x;
 	float y = position.y;
 

@@ -1,13 +1,13 @@
-#include "ITJGameScreen.h"
+#include "ITJGameScreen3.h"
 
-Engine::ITJGameScreen::ITJGameScreen(ITJ* itjInstance) :itj(itjInstance)
+Engine::ITJGameScreen3::ITJGameScreen3(ITJ* itjInstance) :itj(itjInstance)
 {
-	
+
 }
 
-void Engine::ITJGameScreen::GenerateTileMap() {
+void Engine::ITJGameScreen3::GenerateTileMap() {
 
-	// 0 = Empty, 1 = Platform, 2 = Obstacle, 3 = Coin, 4 = Treasure Chest5 = walls
+	// 0 = Empty, 1 = Platform, 2 = Obstacle, 3 = Coin, 4 = Treasure Chest, 5 = walls
 
 	// 23 Baris & 40 Kolom ini buat Tile Size = 32
 	tileMap = {
@@ -16,23 +16,23 @@ void Engine::ITJGameScreen::GenerateTileMap() {
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
+		{5, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 5},
+		{5, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 5},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
 		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-		{5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	};
 
@@ -67,14 +67,14 @@ void Engine::ITJGameScreen::GenerateTileMap() {
 			case 3: // Coin
 			{
 				Sprite* coin = new Sprite(coinTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-				coin->SetSize(40, 10)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(50)->SetScale(3.0f)->AddAnimation("idle", 0, 3);
+				coin->SetSize(40, 10)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(3.0f)->AddAnimation("idle", 0, 3);
 				coins.push_back(coin);
 			}
 			break;
 			case 4: // Treasure Chest
 			{
 				Sprite* chest = new Sprite(chestTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-				chest->SetSize(128, 32)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(50)->SetScale(3.0f)->AddAnimation("open", 1, 3)
+				chest->SetSize(128, 32)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(3.0f)->AddAnimation("open", 1, 3)
 					->AddAnimation("idle", 0, 0);
 				treasureChests.push_back(chest);
 				chest->PlayAnim("Idle");
@@ -95,13 +95,13 @@ void Engine::ITJGameScreen::GenerateTileMap() {
 	}
 }
 
-void Engine::ITJGameScreen::ShowTextForDuration(float duration) {
+void Engine::ITJGameScreen3::ShowTextForDuration(float duration) {
 	isTextVisible = true;
 	textVisibleTime = duration;
 }
 
 //Next Stage
-void Engine::ITJGameScreen::SetTeleportDelay(float delay)
+void Engine::ITJGameScreen3::SetTeleportDelay(float delay)
 {
 	teleportDelay = delay;
 	teleportTimer = teleportDelay; // Initialize the timer
@@ -109,7 +109,7 @@ void Engine::ITJGameScreen::SetTeleportDelay(float delay)
 }
 
 //Coin Counter
-void Engine::ITJGameScreen::UpdateCoinText()
+void Engine::ITJGameScreen3::UpdateCoinText()
 {
 	// Convert coinCount to string
 	std::string coinString = std::to_string(coinCount);
@@ -118,10 +118,11 @@ void Engine::ITJGameScreen::UpdateCoinText()
 	coinText->SetText("X " + coinString);
 }
 
-void Engine::ITJGameScreen::Init() {
+void Engine::ITJGameScreen3::Init() {
 	// Generate the tile-based map
 	GenerateTileMap();
-	
+	coinCount = 0;
+
 	//Create background
 	Texture* bgTexture = new Texture("JungleBg.png");
 	backgroundSprite = (new Sprite(bgTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad()))->SetSize((float)game->GetSettings()->screenWidth, (float)game->GetSettings()->screenHeight);
@@ -129,22 +130,22 @@ void Engine::ITJGameScreen::Init() {
 	// character spritesheet has 11 cols and 2 rows (total frames = 11x2 = 22 frames)
 	/*Texture* bjornTexture = new Texture("bjornSprite.png");
 	bjornSprite = new Sprite(bjornTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-	bjornSprite->SetSize(858, 116)->SetPosition(0, 33)->SetNumXFrames(11)->SetNumYFrames(2)->SetAnimationDuration(30)->SetScale(2.0f)->AddAnimation("jump", 9, 10)->AddAnimation("idle", 11, 21)->AddAnimation("run", 0, 7);
+	bjornSprite->SetSize(858, 116)->SetPosition(0, 0)->SetNumXFrames(11)->SetNumYFrames(2)->SetAnimationDuration(30)->SetScale(2.0f)->AddAnimation("jump", 9, 10)->AddAnimation("idle", 11, 21)->AddAnimation("run", 0, 7);
 	bjornSprite->SetBoundingBoxSize(bjornSprite->GetScaleWidth() - (16 * bjornSprite->GetScale()),
 		bjornSprite->GetScaleHeight() - (4 * bjornSprite->GetScale()));*/
 
 	Texture* bjornTexture = new Texture("monster.png");
 	bjornSprite = new Sprite(bjornTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-	bjornSprite->SetPosition(33, 33)->SetNumXFrames(6)->SetNumYFrames(3)->SetAnimationDuration(70)->SetScale(1.8f)->AddAnimation("attack", 13, 14)->AddAnimation("idle", 0, 3)->AddAnimation("run", 6, 11);
+	bjornSprite->SetPosition(33, 33)->SetNumXFrames(6)->SetNumYFrames(3)->SetAnimationDuration(70)->SetScale(2.0f)->AddAnimation("attack", 13, 14)->AddAnimation("idle", 0, 3)->AddAnimation("run", 6, 11);
 	bjornSprite->SetBoundingBoxSize(bjornSprite->GetScaleWidth() - (16 * bjornSprite->GetScale()),
 		bjornSprite->GetScaleHeight() - (4 * bjornSprite->GetScale()));
-	
+
 	// NPC kunci
 	Texture* npcTexture = new Texture("npc.png");
 	npcSprite = new Sprite(npcTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
 	npcSprite->SetPosition(350, 32)->SetSize(456, 28)->SetNumXFrames(12)->SetNumYFrames(1)->SetAnimationDuration(40)->SetScale(2.0f)->AddAnimation("idle", 0, 11);
-	
-	//Kunci
+
+	///Kunci
 	Texture* keyTexture = new Texture("key.png");
 	keySprite = new Sprite(keyTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
 	keySprite->SetPosition(350, 50)->SetSize(48, 8)->SetScale(4.0f)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(2.0f)->AddAnimation("pop", 0, 3);
@@ -183,7 +184,7 @@ void Engine::ITJGameScreen::Init() {
 	debug = false;
 }
 
-void Engine::ITJGameScreen::Update() {
+void Engine::ITJGameScreen3::Update() {
 	// If user press "Quit" key then exit
 	if (game->GetInputManager()->IsKeyReleased("Quit")) {
 		ScreenManager::GetInstance(game)->SetCurrentScreen("itjgameover");
@@ -194,9 +195,6 @@ void Engine::ITJGameScreen::Update() {
 
 	bjornSprite->PlayAnim("idle");
 	npcSprite->PlayAnim("idle");
-	for (auto& heart : hearts) {
-		heart->PlayAnim("idle");
-	}
 
 	// Move monster sprite using keyboard
 	vec2 oldBjornPos = bjornSprite->GetPosition();
@@ -252,7 +250,7 @@ void Engine::ITJGameScreen::Update() {
 		immunityTimer -= (game->GetGameTime());
 
 		if (immunityTimer <= 0) {
-			isImmune = false; // Reset immunity
+			isImmune = false; // Reset immunity
 		}
 	}
 
@@ -298,6 +296,7 @@ void Engine::ITJGameScreen::Update() {
 	bjornSprite->Update(game->GetGameTime());
 	npcSprite->Update(game->GetGameTime());
 
+
 	// Deteksi interaksi dengan NPC untuk membeli kunci
 	if (bjornSprite->GetBoundingBox()->CollideWith(npcSprite->GetBoundingBox()) && game->GetInputManager()->IsKeyPressed("Attack")) {
 		if (coinCount >= 5) {
@@ -334,7 +333,7 @@ void Engine::ITJGameScreen::Update() {
 				if (teleportTimer <= 0.0f)
 				{
 					// Teleport the player after the delay
-					ScreenManager::GetInstance(game)->SetCurrentScreen("itjgamescreen2");
+					ScreenManager::GetInstance(game)->SetCurrentScreen("victoryscreen");
 					isTeleporting = false; // Reset teleporting flag
 				}
 			}
@@ -367,7 +366,7 @@ void Engine::ITJGameScreen::Update() {
 	}
 }
 
-void Engine::ITJGameScreen::Draw() {
+void Engine::ITJGameScreen3::Draw() {
 	backgroundSprite->Draw();
 	if (isTextVisible) {
 		text->SetPosition(game->GetSettings()->screenWidth / 3 - (text->GetFontSize() * text->GetScale()), game->GetSettings()->screenHeight - (text->GetFontSize() * text->GetScale()));
@@ -380,7 +379,7 @@ void Engine::ITJGameScreen::Draw() {
 		wall->Draw();
 	}
 	bjornSprite->Draw();
-	
+
 	// Gambar rintangan dan NPC
 	for (Sprite* obstacle : obstacles) {
 		obstacle->Draw();

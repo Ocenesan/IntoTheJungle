@@ -8,6 +8,9 @@
 #include "ITJMainMenu.h"
 #include "ITJGameScreen.h"
 #include "ITJGameOver.h"
+#include "ITJGameScreen2.h"
+#include "ITJGameScreen3.h"
+#include "VictoryScreen.h"
 
 namespace Engine {
 	class ITJ :public Engine::Game

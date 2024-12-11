@@ -159,6 +159,8 @@
     <ClInclude Include="ITJ.h" />
     <ClInclude Include="ITJGameOver.h" />
     <ClInclude Include="ITJGameScreen.h" />
+    <ClInclude Include="ITJGameScreen2.h" />
+    <ClInclude Include="ITJGameScreen3.h" />
     <ClInclude Include="ITJMainMenu.h" />
     <ClInclude Include="Lesson11_ParallaxScrolling.h" />
     <ClInclude Include="LessonAI01_SteeringBehaviors.h" />
@@ -191,6 +193,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Turtle.h" />
+    <ClInclude Include="VictoryScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
@@ -206,6 +209,8 @@
     <ClCompile Include="ITJ.cpp" />
     <ClCompile Include="ITJGameOver.cpp" />
     <ClCompile Include="ITJGameScreen.cpp" />
+    <ClCompile Include="ITJGameScreen2.cpp" />
+    <ClCompile Include="ITJGameScreen3.cpp" />
     <ClCompile Include="ITJMainMenu.cpp" />
     <ClCompile Include="Lesson11_ParallaxScrolling.cpp" />
     <ClCompile Include="LessonAI01_SteeringBehaviors.cpp" />
@@ -239,6 +244,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Turtle.cpp" />
+    <ClCompile Include="VictoryScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

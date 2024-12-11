@@ -32,6 +32,11 @@ namespace Engine {
 		void Draw();
 		uint GetFontSize();
 		float GetScale();
+
+		// Tambahan
+		Text* SetVisible(bool visible);
+		bool IsVisible() const;
+		// Tambahan
 	private:
 		void Init();
 		map<GLchar, TextCharacter> TextCharacters;
@@ -43,9 +48,13 @@ namespace Engine {
 		float scale = 1.0f;
 		vec2 position = vec2(0, 0);
 		string text = "";
+
+		// Tambahan
+		bool isVisible = true;
+		// Tambahan
+
 	};
 
 }
 
 #endif
-

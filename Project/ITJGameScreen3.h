@@ -1,5 +1,5 @@
-#ifndef ITJGAMESCREEN_H
-#define ITJGAMESCREEN_H
+#ifndef ITJGAMESCREEN3_H
+#define ITJGAMESCREEN3_H
 
 #include "Game.h"
 #include "Setting.h"
@@ -12,18 +12,20 @@
 #include "Screen.h"
 #include "ScreenManager.h"
 #include "ITJ.h"
+#include <sstream>
 
 namespace Engine {
 	class ITJ;
-	class ITJGameScreen : public Screen
+	class ITJGameScreen3 : public Screen
 	{
 	public:
-		ITJGameScreen(ITJ* itjInstance);
-		//~ITJGameScreen();
+		ITJGameScreen3(ITJ* itjInstance);
+		//~ITJGameScreen3();
 		void GenerateTileMap(); // Generate Map
 		void ShowTextForDuration(float duration); // Set duration for text
 		void SetTeleportDelay(float delay); // Set delay for teleportation
 		void UpdateCoinText(); // Coin counter
+
 		void Init();
 		void Update();
 		void Draw();
@@ -33,7 +35,7 @@ namespace Engine {
 		vector<Sprite*> walls;
 		vector<Sprite*> obstacles; // Rintangan pohon
 		vector<Sprite*> treasureChests; // Peti harta
-		vector<Sprite*> coins; // Koin
+		vector<Sprite*> coins;     // Koin
 		vector<Sprite*> hearts;
 		Sprite* npcSprite = NULL;  // NPC untuk menjual kunci
 		Sprite* bjornSprite = NULL;
@@ -44,7 +46,7 @@ namespace Engine {
 		Sprite* heart = NULL;
 		Sprite* icon = NULL;
 		Music* music = NULL;;
-		Sound* sound = NULL;
+		Sound* sound = NULL; // Jump SFX
 		Sound* coinSound = NULL; // Coin SFX
 		Sound* keySound = NULL; // Key SFX
 		Sound* hurtSound = NULL; // Hurt SFX
@@ -53,8 +55,8 @@ namespace Engine {
 		float yVelocity = 0, gravity = 0;
 		bool jump = false, debug = false;
 		bool hasKey = false; // Status apakah pemain punya kunci
-		int playerHealth = 3;      // Nyawa Bjorn
-		int coinCount = 0;         // Jumlah koin terkumpul
+		int playerHealth = 3; // Nyawa Bjorn
+		int coinCount = 0; // Jumlah koin terkumpul
 		bool isImmune = false; // Status kebal
 		float immunityDuration = 2000.0f; // Durasi kebal dalam milidetik
 		float immunityTimer = 0.0f; // Timer untuk menghitung sisa waktu kebal

@@ -11,9 +11,8 @@ Engine::ITJ::~ITJ()
 
 void Engine::ITJ::Init()
 {
-	Engine::ScreenManager::GetInstance(this)->AddScreen("itjgamescreen", new ITJGameScreen(this))
-		->AddScreen("itjmainmenu", new ITJMainMenu())->AddScreen("itjgameover", new ITJGameOver(this))->SetCurrentScreen("itjmainmenu");
-		//->AddScreen("itjpause", new DinoPauseScreen());
+	Engine::ScreenManager::GetInstance(this)->AddScreen("itjgamescreen", new ITJGameScreen(this))->AddScreen("itjgamescreen2", new ITJGameScreen2(this))
+		->AddScreen("itjgamescreen3", new ITJGameScreen3(this))->AddScreen("victoryscreen", new VictoryScreen(this))->AddScreen("itjmainmenu", new ITJMainMenu())->AddScreen("itjgameover", new ITJGameOver(this))->SetCurrentScreen("itjmainmenu");
 
 	music = (new Music("2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.ogg"))->SetVolume(40)->Play(true);
 

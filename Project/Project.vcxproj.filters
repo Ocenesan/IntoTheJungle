@@ -167,6 +167,15 @@
     <ClInclude Include="ITJGameOver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ITJGameScreen2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ITJGameScreen3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shader.cpp">
@@ -305,6 +314,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ITJGameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ITJGameScreen2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ITJGameScreen3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VictoryScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
