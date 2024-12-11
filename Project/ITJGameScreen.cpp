@@ -61,14 +61,14 @@ void Engine::ITJGameScreen::GenerateTileMap() {
 			case 3: // Coin
 			{
 				Sprite* coin = new Sprite(coinTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-				coin->SetSize(40, 10)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(3.0f)->AddAnimation("idle", 0, 3);
+				coin->SetSize(40, 10)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(50)->SetScale(3.0f)->AddAnimation("idle", 0, 3);
 				coins.push_back(coin);
 			}
 			break;
 			case 4: // Treasure Chest
 			{
 				Sprite* chest = new Sprite(chestTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-				chest->SetSize(128, 32)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(3.0f)->AddAnimation("open", 0, 3);
+				chest->SetSize(128, 32)->SetPosition(position.x, position.y)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(50)->SetScale(3.0f)->AddAnimation("open", 0, 3);
 				treasureChests.push_back(chest);
 			}
 			break;
@@ -91,7 +91,7 @@ void Engine::ITJGameScreen::Init() {
 	// character spritesheet has 11 cols and 2 rows (total frames = 11x2 = 22 frames)
 	/*Texture* bjornTexture = new Texture("bjornSprite.png");
 	bjornSprite = new Sprite(bjornTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-	bjornSprite->SetPosition(0, 33)->SetNumXFrames(11)->SetNumYFrames(2)->SetAnimationDuration(30)->SetScale(2.0f)->AddAnimation("jump", 9, 10)->AddAnimation("idle", 11, 21)->AddAnimation("run", 0, 7);
+	bjornSprite->SetSize(858, 116)->SetPosition(0, 33)->SetNumXFrames(11)->SetNumYFrames(2)->SetAnimationDuration(30)->SetScale(2.0f)->AddAnimation("jump", 9, 10)->AddAnimation("idle", 11, 21)->AddAnimation("run", 0, 7);
 	bjornSprite->SetBoundingBoxSize(bjornSprite->GetScaleWidth() - (16 * bjornSprite->GetScale()),
 		bjornSprite->GetScaleHeight() - (4 * bjornSprite->GetScale()));*/
 
@@ -109,12 +109,15 @@ void Engine::ITJGameScreen::Init() {
 	//Kunci
 	Texture* keyTexture = new Texture("key.png");
 	keySprite = new Sprite(keyTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-	keySprite->SetPosition(360, 32)->SetSize(48, 8)->SetScale(2.0f)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(2.0f)->AddAnimation("pop", 0, 3);
+	keySprite->SetSize(48, 8)->SetScale(2.0f)->SetNumXFrames(4)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(2.0f)->AddAnimation("pop", 0, 3);
 
 	//Health
-	Texture* heart = new Texture("hearts.png");
-	hearts = new Sprite(heart, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
-	hearts->SetPosition(180, 14)->SetSize(66, 34)->SetScale(2.0f)->SetNumXFrames(10)->SetNumYFrames(1)->SetAnimationDuration(10)->SetScale(2.0f)->AddAnimation("hit", 0, 3)->AddAnimation("idle", 4, 9);
+	Texture* heartTexture = new Texture("hearts.png");
+	for (int i = 0; i < playerHealth; ++i) {
+		Sprite* heart = new Sprite(heartTexture, game->GetDefaultSpriteShader(), game->GetDefaultQuad());
+		heart->SetPosition(1 + (i * 38), 675)->SetSize(180, 14)->SetScale(2.0f)->SetNumXFrames(10)->SetNumYFrames(1)->SetAnimationDuration(100)->AddAnimation("idle", 0, 5)->AddAnimation("hit", 6, 9);
+		hearts.push_back(heart); // Add to the hearts vector
+	}
 
 	// Add input mapping 
 	game->GetInputManager()->AddInputMapping("Run Right", SDLK_RIGHT)->AddInputMapping("Run Left", SDLK_LEFT)->AddInputMapping("Jump", SDLK_UP)->AddInputMapping("Attack", SDLK_x)->AddInputMapping("Run Right", SDL_CONTROLLER_BUTTON_DPAD_RIGHT)->AddInputMapping("Run Left", SDL_CONTROLLER_BUTTON_DPAD_LEFT)->AddInputMapping("Jump", SDL_CONTROLLER_BUTTON_A)->AddInputMapping("Attack", SDL_CONTROLLER_BUTTON_X)->AddInputMapping("Quit", SDLK_ESCAPE)->AddInputMapping("Quit", SDL_CONTROLLER_BUTTON_Y);
@@ -134,7 +137,6 @@ void Engine::ITJGameScreen::Init() {
 void Engine::ITJGameScreen::Update() {
 	// If user press "Quit" key then exit
 	if (game->GetInputManager()->IsKeyReleased("Quit")) {
-		dynamic_cast<ITJ*>(game)->SetState(Engine::State::EXIT);
 		ScreenManager::GetInstance(game)->SetCurrentScreen("itjgameover");
 		return;
 	}
@@ -143,6 +145,9 @@ void Engine::ITJGameScreen::Update() {
 
 	bjornSprite->PlayAnim("idle");
 	npcSprite->PlayAnim("idle");
+	for (auto& heart : hearts) {
+		heart->PlayAnim("idle");
+	}
 
 	// Move monster sprite using keyboard
 	vec2 oldBjornPos = bjornSprite->GetPosition();
@@ -170,17 +175,23 @@ void Engine::ITJGameScreen::Update() {
 	// Obstacle Collision
 	for (Sprite* obstacle : obstacles) {
 		if (bjornSprite->GetBoundingBox()->CollideWith(obstacle->GetBoundingBox())) {
+			//revert x position if collided
+			x = oldBjornPos.x;
+			bjornSprite->SetPosition(x, y);
 			//bjornSprite->PlayAnim("attack");
 			if (!isImmune) {
 				// Trigger immunity
 				playerHealth--;
 				isImmune = true;
 				immunityTimer = immunityDuration;
+				if (playerHealth > 0) {
+					hearts[playerHealth]->PlayAnim("hit"); // Correct index
+					hearts.erase(hearts.begin() + playerHealth);
+				}
 			}
 
 			if (playerHealth <= 0) {
 				ScreenManager::GetInstance(game)->SetCurrentScreen("itjgameover");
-				dynamic_cast<ITJ*>(game)->SetState(Engine::State::EXIT);
 				return;
 			}
 		}
@@ -241,6 +252,7 @@ void Engine::ITJGameScreen::Update() {
 	if (bjornSprite->GetBoundingBox()->CollideWith(npcSprite->GetBoundingBox()) && game->GetInputManager()->IsKeyReleased("Attack")) {
 		if (coinCount >= 5) {
 			keySprite->PlayAnim("pop");
+			keySprite->Update(game->GetGameTime());
 			hasKey = true;       // Membeli kunci
 			coinCount -= 5;      // Kurangi jumlah koin
 			sound->Play(false);  // Suara konfirmasi pembelian
@@ -253,9 +265,10 @@ void Engine::ITJGameScreen::Update() {
 
 	// Deteksi pembukaan peti
 	for (Sprite* chest : treasureChests) {
-		if (hasKey && bjornSprite->GetBoundingBox()->CollideWith(chest->GetBoundingBox())) {
+		if (hasKey && bjornSprite->GetBoundingBox()->CollideWith(chest->GetBoundingBox()) && game->GetInputManager()->IsKeyReleased("Attack")) {
 			// Logika membuka peti
-			chest->PlayAnim("open"); // Hilangkan peti dari layar
+			chest->PlayAnim("open"); 
+			chest->Update(game->GetGameTime());
 		}
 	}
 
@@ -283,7 +296,10 @@ void Engine::ITJGameScreen::Draw() {
 	}
 	npcSprite->Draw();
 	keySprite->Draw();
-
+	for (Sprite* heart : hearts) {
+		heart->Update(game->GetGameTime());
+		heart->Draw();
+	}
 	// Gambar peti harta
 	for (Sprite* chest : treasureChests) {
 		chest->Draw();

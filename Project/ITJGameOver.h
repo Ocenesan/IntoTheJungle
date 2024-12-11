@@ -25,6 +25,7 @@ namespace Engine {
 	private:
 		vector<Button*> buttons;
 		Text* gameOverText = NULL;
+		Sprite* backgroundSprite = NULL;
 		int currentButtonIndex = 0;
 		ITJ* itj;
 	};

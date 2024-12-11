@@ -29,14 +29,15 @@ namespace Engine {
 		vector<Sprite*> platforms;
 		vector<Sprite*> obstacles; // Rintangan pohon
 		vector<Sprite*> treasureChests; // Peti harta
-		vector<Sprite*> coins;     // Koin
+		vector<Sprite*> coins; // Koin
+		vector<Sprite*> hearts;
 		Sprite* npcSprite = NULL;  // NPC untuk menjual kunci
 		Sprite* bjornSprite = NULL;
 		Sprite* backgroundSprite = NULL;
 		Sprite* treeSprite = NULL;
 		Sprite* coin = NULL;
 		Sprite* keySprite = NULL;
-		Sprite* hearts = NULL;
+		Sprite* heart = NULL;
 		Music* music = NULL;;
 		Sound* sound = NULL;
 		Text* text = NULL;
