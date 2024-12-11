@@ -26,7 +26,7 @@ void Engine::ITJMainMenu::Init()
 
 	//Create Buttons
 	Button* playButton = new Button(playSprite, "play");
-	playButton->SetPosition((game->GetSettings()->screenWidth / 2) - (playSprite->GetScaleWidth() / 2), 400);
+	playButton->SetPosition((game->GetSettings()->screenWidth / 2) - (playSprite->GetScaleWidth() / 2), 200);
 	buttons.push_back(playButton);
 
 	// Set play button into active button
@@ -40,7 +40,7 @@ void Engine::ITJMainMenu::Init()
 	// Add input mappings
 	game->GetInputManager()->AddInputMapping("next", SDLK_DOWN)
 		->AddInputMapping("prev", SDLK_UP)
-		->AddInputMapping("press", SDLK_RETURN);
+		->AddInputMapping("press", SDLK_SPACE);
 
 }
 
@@ -76,7 +76,7 @@ void Engine::ITJMainMenu::Update()
 		b->SetButtonState(Engine::ButtonState::PRESS);
 		// If play button then go to InGame, exit button then exit
 		if ("play" == b->GetButtonName()) {
-			cout << "tes" << endl;
+			//cout << "tes" << endl;
 			ScreenManager::GetInstance(game)->SetCurrentScreen("itjgamescreen");
 		}
 		else if ("exit" == b->GetButtonName()) {
